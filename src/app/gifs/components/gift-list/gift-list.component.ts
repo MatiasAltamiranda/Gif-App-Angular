@@ -1,5 +1,6 @@
 import {  Component, input } from '@angular/core';
 import { GiftListItemComponent } from "./gift-list-item/gift-list-item.component";
+import { Gif } from '../../interfaces/gif.interfaces';
 
 
 @Component({
@@ -9,6 +10,6 @@ import { GiftListItemComponent } from "./gift-list-item/gift-list-item.component
 })
 export class GiftListComponent {
 
-  gift = input.required<string[]>();
+  gift = input.required<Gif[]>();
 
 }
