@@ -4,6 +4,7 @@ import { inject, Injectable, signal } from '@angular/core';
 import type { GiphyResponse } from '../interfaces/giphy.interfaces';
 import { Gif } from '../interfaces/gif.interfaces';
 import { GifMapper } from '../mapper/gif.mapper';
+import { map } from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 export class GifService {
@@ -35,17 +36,22 @@ export class GifService {
   }
 
   searchGifs(query:string){
-    this.http.get<GiphyResponse>(`${environment.giphyURL}/gifs/search`,{
+   return this.http.get<GiphyResponse>(`${environment.giphyURL}/gifs/search`,{
       params :{
         api_key : environment.giphyApiKey,
         limit : 32,
         q: query,
 
       }
-    }).subscribe((resp)=>{
+    }).pipe(
+      map( ({data}) => data ),
+      map( (items) => GifMapper.mapGiphyItemsToGifArray(items) )
+    );
+    /* .subscribe((resp)=>{
        const gifs = GifMapper.mapGiphyItemsToGifArray(resp.data);
        console.log( {search: gifs})
-    });
+       return gifs
+    }); */
   }
 
 
