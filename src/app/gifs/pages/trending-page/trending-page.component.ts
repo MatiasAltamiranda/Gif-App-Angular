@@ -21,9 +21,11 @@ export default class TrendingPageComponent {
     const clientHeight = scrollDiv.clientHeight;
     const scrollHeigth = scrollDiv.scrollHeight;
 
-    const isAtBottom = scrollTop + clientHeight + 200 >= scrollHeigth;
+    const isAtBottom = scrollTop + clientHeight + 300 >= scrollHeigth;
 
-
+      if(isAtBottom){
+        this.gifService.loadTrendingGifs();
+      }
 
 
   }
