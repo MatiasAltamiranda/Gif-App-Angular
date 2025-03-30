@@ -105,4 +105,6 @@ export class GifService {
       return this.searchHistory()[query] ?? []
   }
 
+  
+
 }
